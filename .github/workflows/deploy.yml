@@ -1,0 +1,28 @@
+name: Deploy to Fly.io
+
+on:
+  push:
+    branches:
+      - main  # Despliega cuando se hace merge a la rama main
+  # pull_request:
+  #   branches:
+  #     - main  # Opcional, si quieres ejecutar en PRs también.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Fly.io CLI
+      run: |
+        curl -L https://fly.io/install.sh | sh
+        export FLYCTL_INSTALL="/home/runner/.fly"
+        export PATH="$FLYCTL_INSTALL/bin:$PATH"
+      
+    - name: Authenticate to Fly.io
+      run: fly auth token ${{ secrets.FLY_API_TOKEN }}
+
+    - name: Deploy to Fly.io
+      run: fly deploy --remote-only
