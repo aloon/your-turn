@@ -1,5 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { redirectToNewRoom } from '../lib/scripts';
+
+const simpleTest = () => {
+  console.log("Simple test function works!");
+};
+
 ---
 
 <Layout title="Your turn">
@@ -9,12 +15,15 @@ import Layout from '../layouts/Layout.astro';
         This simple web application helps manage the team's tasks by rotating turns. 
         If a team member is unavailable, their turn can be skipped, ensuring the tasks are still managed efficiently.
       </p>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button onClick={redirectToNewRoom} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Generate New Team Room
       </button>
       <p class="mt-4">
         Or go to your previously created room.
       </p>
+
+      <button onClick={simpleTest} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">TestButton</button>
+
     </section>
   </Layout>
   
