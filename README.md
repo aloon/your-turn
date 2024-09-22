@@ -52,14 +52,3 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-
-## GPT
-
-hazme codigo de una home con astro y tailwindcss
-haz por un lado un layout que reaprovecharé en el resto de páginas del proyecto y por otro la pagina
-tiene que ser responsive
-Que explique que esto es una simple aplicacion web que sirve para controlar a que miembro del equipo le toca hacer la tarea en cuestión.
-Siendo turnos rotativos pudiendo salta un turno si hiciera falta porque un miembro del equipo no está disponible.
-Tiene que haber un botón para generar una nueva sala de equipo o te dice que vayas a la página creada anteriormente.
-La página tiene que estar en inglés pero las explicaciones damelas en español
