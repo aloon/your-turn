@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import NewRoom from "../components/NewRoom.astro";
 import Logo from "../components/Logo.astro";
 
-const apiUrl = import.meta.env.TURSO_DATABASE_URL;
+const apiUrl = process.env.TURSO_DATABASE_URL;
 ---
 apiUrl: {apiUrl}
 <Layout title="Your turn">
