@@ -1,53 +1,48 @@
 # syntax = docker/dockerfile:1
 
-# Adjust NODE_VERSION as desired
+# Ajusta NODE_VERSION como desees
 ARG NODE_VERSION=22.4.1
-FROM node:${NODE_VERSION}-slim as base
+FROM node:${NODE_VERSION}-slim AS base
 
 LABEL fly_launch_runtime="Astro"
 
-# Astro app lives here
+# La aplicación Astro vive aquí
 WORKDIR /app
 
-# Set production environment
+# Establecer el entorno de producción
 ENV NODE_ENV="production"
 
+# Etapa de construcción para reducir el tamaño de la imagen final
+FROM base AS build
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build node modules
+# Instalar paquetes necesarios para construir módulos de node
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
-# Install node modules
+# Instalar módulos de node
 COPY --link package-lock.json package.json ./
 RUN npm ci --include=dev
 
-# Copy application code
+# Copiar el código de la aplicación
 COPY --link . .
 
-# Build application
+# Construir la aplicación
 RUN npm run build
 
-# Remove development dependencies
+# Eliminar dependencias de desarrollo
 RUN npm prune --omit=dev
 
-
-# Final stage for app image
-#FROM nginx
+# Etapa final para la imagen de la aplicación
 FROM node:${NODE_VERSION}-slim
 
-# Copy built application
-#COPY --from=build /app/dist /usr/share/nginx/html
+# Copiar toda la aplicación
 COPY --from=build /app /app
+
+# Establecer el directorio de trabajo para el contenedor
 WORKDIR /app
 
-# Start the server by default, this can be overwritten at runtime
+# Exponer el puerto 80
 EXPOSE 80
-# CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
 
-
-#CMD ["node", "dist/server.js"]
-#CMD ["node", "dist/server/entry.mjs"]
+# Comando para ejecutar la aplicación, estableciendo el puerto a 80
 CMD ["sh", "-c", "PORT=80 node dist/server/entry.mjs"]
