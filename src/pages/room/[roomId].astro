@@ -1,9 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Person from "../../components/Person.astro";
+const { roomId } = Astro.params;
 ---
 
 <Layout title="Your turn">
+  <h1>{roomId}</h1>
   <div class="space-y-4">
     <Person id="1">Kevin</Person>
     <Person id="2">Desi</Person>
