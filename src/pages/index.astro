@@ -1,12 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-//import '../lib/scripts.ts';
 import NewRoom from "../components/NewRoom.astro";
 import Logo from "../components/Logo.astro";
-
-const apiUrl = process.env.TURSO_DATABASE_URL;
+const apiUrl = process.env.TURSO_DATABASE_URL || import.meta.env.TURSO_DATABASE_URL;
 ---
-apiUrl: {apiUrl}
 <Layout title="Your turn">
   
   <section class="flex flex-col justify-center items-center h-screen text-center">
