@@ -1,9 +1,11 @@
 ---
+import Logo from "../components/Logo.astro";
 interface Props {
-	id: string;
+	id: string,
+  yourTurn: boolean
 }
 
-const { id } = Astro.props;
+const { id, yourTurn=false } = Astro.props;
 ---
 <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow" id={id}>
     
@@ -23,8 +25,12 @@ const { id } = Astro.props;
     </div>
 
     
-    <div class="text-lg font-medium"><slot /></div>
-
+    <div class="flex items-center justify-between text-lg font-medium">
+      <div class="flex-1 text-center">
+        <slot />
+      </div>
+      {yourTurn && <Logo width={80} height={80} />}
+    </div>
     
     <button class="bg-blue-500 text-white p-2 rounded hover:bg-red-500 transition duration-300">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
