@@ -4,7 +4,7 @@ import Person from "../../components/Person.astro";
 import AddPerson from "../../components/AddPerson.astro";
 import Logo from "../../components/Logo.astro";
 const { roomId } = Astro.params;
-
+if (!roomId) Error('Room ID is undefined');
 // import { db, Room } from "astro:db";
 // const room = await db.select().from(Room).where("id", roomId);
 
@@ -35,13 +35,13 @@ if (rows.length === 0) {
   </div>
 </Layout>
 <script>
-  const roomElement = document.getElementById("room-name");
+  const roomElement = document.getElementById("room-name") as HTMLInputElement;
 
   const edit = () => {
     if(!roomElement) return;
     roomElement.innerHTML = `<input type="text" value="${roomElement.innerHTML}" id="room-name-edit" class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" minlength="3" maxlength="30" />`;
     roomElement.removeEventListener("click", edit);
-    const roomEditElement = document.getElementById("room-name-edit");
+    const roomEditElement = document.getElementById("room-name-edit") as HTMLInputElement;
     if (!roomEditElement) return;
     roomEditElement.focus();
     roomEditElement.addEventListener("keydown", acceptEdit);
@@ -49,7 +49,7 @@ if (rows.length === 0) {
 
   const acceptEdit = (event) => {
     if (event.key === "Enter") {
-      const roomEditElement = document.getElementById("room-name-edit");
+      const roomEditElement = document.getElementById("room-name-edit") as HTMLInputElement;
       if (!roomEditElement) return;
       roomElement.innerHTML = roomEditElement.value;
       roomElement.addEventListener("click", edit);
