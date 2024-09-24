@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
-    "@astrojs/db": "^0.14.1",
     "@astrojs/node": "^8.3.4",
     "@astrojs/tailwind": "^5.1.1",
     "@libsql/client": "^0.14.0",
