@@ -12,8 +12,7 @@
   const newRoomButton = document.getElementById("new-room");
   if (newRoomButton) {
     newRoomButton.addEventListener("click", () => {
-      //const room = Math.random().toString(36).substring(2, 15);
-const room='room';
+      const room = Math.random().toString(36).substring(2, 15);
       window.location.href = `/room/${room}`;
     });
   }
