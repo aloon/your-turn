@@ -18,7 +18,7 @@ const { rows } = await turso.execute({
 if (rows.length === 0) {
   turso.execute({
     sql: 'INSERT INTO Room (id, name, alterDate) VALUES (?,?,?)',
-    args: [roomId, roomId, new Date()]
+    args: [roomId as string, roomId as string, new Date()]
   });
 }
 ---
