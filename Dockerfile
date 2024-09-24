@@ -49,4 +49,5 @@ EXPOSE 80
 
 
 #CMD ["node", "dist/server.js"]
-CMD ["node", "dist/server/entry.mjs"]
+#CMD ["node", "dist/server/entry.mjs"]
+CMD ["sh", "-c", "PORT=80 node dist/server/entry.mjs"]
