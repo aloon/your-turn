@@ -12,7 +12,7 @@ if (!roomId) Error('Room ID is undefined');
 import { turso } from '../../turso'
 const { rows } = await turso.execute({
   sql: 'SELECT * FROM Room WHERE id = ?',
-  args: [roomId]
+  args: [roomId as string]
 });
 
 if (rows.length === 0) {
