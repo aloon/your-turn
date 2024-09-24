@@ -11,6 +11,7 @@ WORKDIR /app
 
 # Establecer el entorno de producción
 ENV NODE_ENV="production"
+ENV PORT=80
 
 # Etapa de construcción para reducir el tamaño de la imagen final
 FROM base AS build
