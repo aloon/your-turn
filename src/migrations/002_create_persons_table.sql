@@ -1,0 +1,7 @@
+CREATE TABLE Person (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    roomId TEXT,
+    name VARCHAR(50) NOT NULL,
+    position INTEGER,
+    FOREIGN KEY (roomId) REFERENCES Room(id)
+);
