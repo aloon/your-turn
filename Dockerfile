@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm install
-RUN npm run build
+RUN npm run build -- --remote
 
 ENV HOST=0.0.0.0
 ENV PORT=80
