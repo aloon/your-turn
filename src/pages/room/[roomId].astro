@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Person from "../../components/Person.astro";
+import AddPerson from "../../components/AddPerson.astro";
 const { roomId } = Astro.params;
 ---
 
@@ -10,5 +11,6 @@ const { roomId } = Astro.params;
     <Person id="1">Kevin</Person>
     <Person id="2">Desi</Person>
     <Person id="3">Alex</Person>
+    <AddPerson />
   </div>
 </Layout>
