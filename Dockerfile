@@ -35,11 +35,15 @@ RUN npm prune --omit=dev
 
 
 # Final stage for app image
-FROM nginx
+#FROM nginx
+FROM node:${NODE_VERSION}-slim
 
 # Copy built application
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 80
-CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+# CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+
+
+CMD ["node", "dist/server.js"]
