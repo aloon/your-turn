@@ -47,7 +47,7 @@ if (rows.length === 0) {
     roomEditElement.addEventListener("keydown", acceptEdit);
   };
 
-  const acceptEdit = (event) => {
+  const acceptEdit = (event: KeyboardEvent) => {
     if (event.key === "Enter") {
       const roomEditElement = document.getElementById("room-name-edit") as HTMLInputElement;
       if (!roomEditElement) return;
