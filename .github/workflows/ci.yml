@@ -1,0 +1,40 @@
+name: CI - Test and Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+
+    #   - name: Run tests
+    #     run: npm run test
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Build Astro project
+        run: npm run build
+
+      - name: Upload error logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-logs
+          path: |
+            ./logs
+            ./dist
