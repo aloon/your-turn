@@ -1,13 +1,8 @@
 ---
-interface Props {
-	roomId: string
-}
-
-const { roomId } = Astro.props;
 ---
 <slot />
 <script>
-    const roomElement = document.getElementById("room-name") as HTMLInputElement;
+    const roomElement = document.getElementById("room-name") as HTMLInputElement;    
   
     const edit = () => {
       if (!roomElement) return;
@@ -27,6 +22,15 @@ const { roomId } = Astro.props;
       if (!roomEditElement) return;
   
       if ((event instanceof KeyboardEvent && event.key === "Enter") || event instanceof FocusEvent) {
+        const roomIdElement = document.getElementById("room-id") as HTMLInputElement;
+        if (!roomIdElement) return;
+        fetch(`/api/room/${roomIdElement.value}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: roomEditElement.value})
+        });
         roomElement.innerHTML = roomEditElement.value;
         roomElement.addEventListener("click", edit);
       }
