@@ -1,6 +1,12 @@
 ---
+interface Props {
+	roomId: string
+}
+
+const { roomId } = Astro.props;
 ---
-<slot />
+
+<h1 class="text-2xl font-bold" id="room-name" data-room-id={roomId}><slot /></h1>
 <script>
     const roomElement = document.getElementById("room-name") as HTMLInputElement;    
   
@@ -22,9 +28,7 @@
       if (!roomEditElement) return;
   
       if ((event instanceof KeyboardEvent && event.key === "Enter") || event instanceof FocusEvent) {
-        const roomIdElement = document.getElementById("room-id") as HTMLInputElement;
-        if (!roomIdElement) return;
-        fetch(`/api/room/${roomIdElement.value}`, {
+        fetch(`/api/room/${roomElement.dataset.roomId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
