@@ -27,8 +27,8 @@ export const PUT: APIRoute = async ({ params, request }) => {
     }
 
     turso.execute({
-        sql: "UPDATE Room SET name = ? WHERE id = ?",
-        args: [name, roomId],
+        sql: "UPDATE room SET name = ?, alter_date = ? WHERE id = ?",
+        args: [name, new Date(), roomId]
       });
     
     return new Response(JSON.stringify({ roomId, name }), {

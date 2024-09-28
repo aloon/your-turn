@@ -16,13 +16,13 @@ const { rows } = await turso.execute({
 let roomName = roomId as string;
 if (rows.length === 0) {
   turso.execute({
-    sql: "INSERT INTO Room (id, name, alterDate) VALUES (?,?,?)",
+    sql: "INSERT INTO room (id, name, alter_date) VALUES (?,?,?)",
     args: [roomId as string, roomId as string, new Date()],
   });
 } else {
   roomName = rows[0].name as string;
   turso.execute({
-    sql: "UPDATE Room SET alterDate = ? WHERE id = ?",
+    sql: "UPDATE room SET alter_date = ? WHERE id = ?",
     args: [new Date(), roomId as string],
   });
 }

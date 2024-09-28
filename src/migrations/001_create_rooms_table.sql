@@ -1,5 +1,5 @@
-CREATE TABLE Room (
-    id TEXT PRIMARY KEY,
+CREATE TABLE room (
+    id VARCHAR(20) PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    alterDate DATE
+    alter_date DATE
 );
