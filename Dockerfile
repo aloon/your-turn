@@ -16,6 +16,3 @@ ENV NODE_ENV="production"
 
 EXPOSE 80
 CMD ["node", "./dist/server/entry.mjs"]
-
-# docker build -t mi-aplicacion-astro .
-# docker run -p 8022:80 mi-aplicacion-astro
