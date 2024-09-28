@@ -22,9 +22,7 @@
       if (!roomEditElement) return;
   
       if ((event instanceof KeyboardEvent && event.key === "Enter") || event instanceof FocusEvent) {
-        const roomIdElement = document.getElementById("room-id") as HTMLInputElement;
-        if (!roomIdElement) return;
-        fetch(`/api/room/${roomIdElement.value}`, {
+        fetch(`/api/room/${roomElement.dataset.roomId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

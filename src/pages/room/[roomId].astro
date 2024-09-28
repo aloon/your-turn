@@ -33,7 +33,7 @@ if (rows.length === 0) {
 <Layout title={pageTitle}>
   <div class="flex items-center space-x-4">
     <a href="/"><Logo width={100} height={100} /></a>
-    <h1 class="text-2xl font-bold" id="room-name"><RoomTitle>{roomName}</RoomTitle></h1>
+    <h1 class="text-2xl font-bold" id="room-name" data-room-id={roomId}><RoomTitle>{roomName}</RoomTitle></h1>
   </div>
   <div class="space-y-4">
     <Person id="1" yourTurn={true}>Kevin</Person>
@@ -41,6 +41,5 @@ if (rows.length === 0) {
     <Person id="3" yourTurn={false}>Alex</Person>
     <AddPerson />
   </div>
-  <input type="hidden" value={roomId} id="room-id" />
 </Layout>
 
