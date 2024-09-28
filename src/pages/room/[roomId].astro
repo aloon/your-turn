@@ -14,6 +14,7 @@ const { rows } = await turso.execute({
   args: [roomId as string],
 });
 let roomName = roomId as string;
+let pageTitle = "Your turn";
 if (rows.length === 0) {
   turso.execute({
     sql: "INSERT INTO room (id, name, alter_date) VALUES (?,?,?)",
@@ -21,6 +22,7 @@ if (rows.length === 0) {
   });
 } else {
   roomName = rows[0].name as string;
+  pageTitle = roomName + " - Your turn";
   turso.execute({
     sql: "UPDATE room SET alter_date = ? WHERE id = ?",
     args: [new Date(), roomId as string],
@@ -28,7 +30,7 @@ if (rows.length === 0) {
 }
 ---
 
-<Layout title="Your turn">
+<Layout title={pageTitle}>
   <div class="flex items-center space-x-4">
     <a href="/"><Logo width={100} height={100} /></a>
     <h1 class="text-2xl font-bold" id="room-name"><RoomTitle>{roomName}</RoomTitle></h1>
