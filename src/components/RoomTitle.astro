@@ -1,6 +1,12 @@
 ---
+interface Props {
+	roomId: string
+}
+
+const { roomId } = Astro.props;
 ---
-<slot />
+
+<h1 class="text-2xl font-bold" id="room-name" data-room-id={roomId}><slot /></h1>
 <script>
     const roomElement = document.getElementById("room-name") as HTMLInputElement;    
   
