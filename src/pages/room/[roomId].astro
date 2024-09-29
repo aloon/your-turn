@@ -9,25 +9,30 @@ import { turso } from "../../turso";
 const { roomId } = Astro.params;
 if (!roomId) throw new Error("Room ID is undefined");
 
-const { rows } = await turso.execute({
-  sql: "SELECT * FROM Room WHERE id = ?",
+const { rows: rooms } = await turso.execute({
+  sql: "SELECT * FROM room WHERE id = ?",
   args: [roomId as string],
 });
 let roomName = roomId as string;
 let pageTitle = "Your turn";
-if (rows.length === 0) {
+if (rooms.length === 0) {
   turso.execute({
     sql: "INSERT INTO room (id, name, alter_date) VALUES (?,?,?)",
     args: [roomId as string, roomId as string, new Date()],
   });
 } else {
-  roomName = rows[0].name as string;
+  roomName = rooms[0].name as string;
   pageTitle = roomName + " - Your turn";
   turso.execute({
     sql: "UPDATE room SET alter_date = ? WHERE id = ?",
     args: [new Date(), roomId as string],
   });
 }
+
+const { rows: peopleData } = await turso.execute({
+  sql: "SELECT id,name,position FROM person WHERE room_id = ? order by position",
+  args: [roomId as string],
+});
 ---
 
 <Layout title={pageTitle}>
@@ -36,10 +41,21 @@ if (rows.length === 0) {
     <RoomTitle roomId={roomId}>{roomName}</RoomTitle>
   </div>
   <div class="space-y-4">
-    <Person id="1" yourTurn={true}>Kevin</Person>
-    <Person id="2" yourTurn={false}>Desi</Person>
-    <Person id="3" yourTurn={false}>Alex</Person>
+    {peopleData.map((person=>(<Person id={person.id as string} yourTurn={false}>{person.name as string}</Person>)))}
+  </div>
+  <div class="mt-4">
     <AddPerson />
   </div>
-</Layout>
+  <div id="people-data" data-people={JSON.stringify(peopleData)}></div>
+  <script>
+    import { people } from "../../store.ts";
+    import type { PersonDto } from "../../personDto.ts";
 
+    const peopleElement = document.getElementById('people-data') as HTMLElement;
+    if (peopleElement) {
+      const peopleFromServer: PersonDto[] = JSON.parse(peopleElement.dataset.people as string);
+      people.set(peopleFromServer);
+    }
+
+  </script>
+</Layout>
