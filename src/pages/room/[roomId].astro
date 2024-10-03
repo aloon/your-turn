@@ -42,7 +42,7 @@ const { rows: peopleData } = await turso.execute({
   </div>
 
   <div class="space-y-4" id="list-people">
-    <div id="people-data" data-people={JSON.stringify(peopleData)}></div>
+    <div id="people-names" data-people={JSON.stringify(peopleData.map((person) => person.name))}></div>
     <People client:only="svelte" />
   </div>
 </Layout>

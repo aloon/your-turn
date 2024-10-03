@@ -1,16 +1,14 @@
 <script lang="ts">
     import type { PersonDto } from "../personDto.ts";
 
-    export let name: string;
-    export let id: string;
     export let position: number;
-    export let allPeople: PersonDto[];
+    export let allPeople: string[];
     export let onDelete: () => void;
     export let onUp: () => void;
     export let onDown: () => void;
   </script>
 
-<div class="flex items-center justify-between bg-white p-4 rounded-lg shadow person mt-4" id={id}>
+<div class="flex items-center justify-between bg-white p-4 rounded-lg shadow person mt-4">
     
     <div class="flex flex-col space-y-2">
       {#if position !== 0}
@@ -33,7 +31,7 @@
     
     <div class="flex items-center justify-between text-lg font-medium">
       <div class="flex-1 text-center">
-        {name}
+        {allPeople[position]}
       </div>
       <!-- {#if position !== 0}<Logo width={80} height={80} />{/if} -->
     </div>

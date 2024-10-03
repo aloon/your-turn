@@ -2,42 +2,47 @@
     import type { PersonDto } from "../personDto.ts";
     import Person from "./Person.svelte";
 
-    let peopleFromServer: PersonDto[] = [];
-
-    const peopleElement = document.getElementById("people-data") as HTMLElement;
-    if (peopleElement) {
-        peopleFromServer = JSON.parse(peopleElement.dataset.people as string);
+    let peopleNames: string[] = [];
+    const peopleNamesElement = document.getElementById("people-names") as HTMLElement;
+    if (peopleNamesElement) {
+        peopleNames = JSON.parse(peopleNamesElement.dataset.people as string);
     }
 
-    const remove = (personId: string) => {
-        peopleFromServer = peopleFromServer.filter((person) => person.id !== personId);
+    const remove = (index: number) => {
+        peopleNames = [...peopleNames.slice(0, index), ...peopleNames.slice(index + 1)];
     };
 
-    const up = (personId: string) => {
-        const index = peopleFromServer.findIndex((person) => person.id === personId);
+    const up = (index: number) => {
         if (index > 0) {
-            const personToMove = peopleFromServer[index];
-            peopleFromServer = [...peopleFromServer.slice(0, index - 1), personToMove, ...peopleFromServer.slice(index - 1, index), ...peopleFromServer.slice(index + 1)];
+            const personToMove = peopleNames[index];
+            peopleNames = [
+                ...peopleNames.slice(0, index - 1),
+                personToMove,
+                ...peopleNames.slice(index - 1, index),
+                ...peopleNames.slice(index + 1)
+            ];
         }
     };
 
-    const down = (personId: string) => {
-        const index = peopleFromServer.findIndex((person) => person.id === personId);
-        if (index < peopleFromServer.length - 1) {
-            const personToMove = peopleFromServer[index];
-            peopleFromServer = [...peopleFromServer.slice(0, index), ...peopleFromServer.slice(index + 1, index + 2), personToMove, ...peopleFromServer.slice(index + 2)];
+    const down = (index: number) => {
+        if (index < peopleNames.length - 1) {
+            const personToMove = peopleNames[index];
+            peopleNames = [
+                ...peopleNames.slice(0, index),
+                ...peopleNames.slice(index + 1, index + 2),
+                personToMove,
+                ...peopleNames.slice(index + 2)
+            ];
         }
     };
 </script>
 
-{#each peopleFromServer as person, i}
+{#each peopleNames as name, i}
     <Person 
         position={i} 
-        allPeople={peopleFromServer} 
-        name={person.name} 
-        id={person.id} 
-        onDelete={() => remove(person.id)}
-        onUp={() => up(person.id)}
-        onDown={() => down(person.id)}
+        allPeople={peopleNames} 
+        onDelete={() => remove(i)}
+        onUp={() => up(i)}
+        onDown={() => down(i)}
      />
 {/each}
