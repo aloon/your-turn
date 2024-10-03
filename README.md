@@ -12,9 +12,9 @@
 ## chatGPT question
 
 ``` text
-Como hacer en astro sin instalar ningún framework js
+Como hacer en astro usando svente
 
-Tengo un componente <Person> que se repite en la página, y quiero que cada <Person> tenga su propio botón de eliminar, subir y bajar de la lista de <Person>
+un componente <Person> que se repite en la página, y quiero que cada <Person> tenga su propio botón de eliminar, subir y bajar de la lista de <Person>
 
 Tambien Tengo un componente <AddPerson> con un input de texto para agregar un nuevo <Person> a la lista
 
