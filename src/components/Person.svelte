@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type { PersonDto } from "../personDto.ts";
-
     export let position: number;
     export let allPeople: string[];
     export let onDelete: () => void;
