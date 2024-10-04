@@ -1,6 +1,7 @@
 <script lang="ts">
   import Person from "./Person.svelte";
   import AddPerson from "./AddPerson.svelte";
+  import Done from './Done.svelte';
 
   let peopleNames: string[] = [];
   let roomId: string = "";
@@ -58,6 +59,14 @@
     sendToServer();
   };
 
+  const queued = () => {
+    if (peopleNames.length > 0) {
+        const firstName = peopleNames[0];
+        peopleNames = [...peopleNames.slice(1), firstName];
+        sendToServer();
+    }
+  };
+
   const sendToServer = async () => {
     try {
       const response = await fetch(`/api/room/${roomId}`, {
@@ -78,6 +87,8 @@
     }
   };
 </script>
+
+<Done onQueue={queued} />
 
 {#each peopleNames as name, i}
   <Person
