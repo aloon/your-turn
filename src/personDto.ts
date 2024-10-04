@@ -1,5 +1,4 @@
 export interface PersonDto {
-    id: string;
+    id: number;
     name: string;
-    position: number;
 }
