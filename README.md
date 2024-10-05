@@ -4,7 +4,7 @@ Small application to manage who has to do a task on a rotating basis.
 
 It is an application created primarily with the intention of learning Astro, Svelte, Tailwind and TypeScript.
 
-It is published on [Fly.io](https://your-turn.fly.dev/)
+It is published [Your Turn](https://your-turn.fly.dev/) on [Fly.io](https://fly.io/)
 
 ## Documentation
 
