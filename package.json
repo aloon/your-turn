@@ -27,7 +27,7 @@
     "@flydotio/dockerfile": "^0.5.8",
     "eslint": "^9.12.0",
     "eslint-plugin-astro": "^1.2.4",
-    "globals": "^15.10.0",
+    "globals": "^15.11.0",
     "typescript-eslint": "^8.9.0"
   }
 }
