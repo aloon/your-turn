@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let onAdd: () => void;
+  export let onAdd: (event: KeyboardEvent) => void;
 </script>
 
 <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow mt-4">
